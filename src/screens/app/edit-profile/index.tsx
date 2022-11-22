@@ -66,48 +66,55 @@ const EditProfile = ({ navigation }: NativeStackScreenProps<any>) => {
         //     console.log(res)
         // }
     }
-    const openGallery = async() => {
+    const openGallery = async () => {
         let options = {
             saveToPhotos: true
         }
-        const result= await launchImageLibrary(options)
-            setFilePath(result.assets[0].uri)
-            // if (response.didCancel) {
-            //     Alert.alert('User cancelled camera picker');
-            //     return;
-            // } else if (response.errorCode == 'camera_unavailable') {
-            //     Alert.alert('Camera not available on device');
-            //     return;
-            // } else if (response.errorCode == 'permission') {
-            //     Alert.alert('Permission not satisfied');
-            //     return;
-            // } else if (response.errorCode == 'others') {
-            //     Alert.alert(response.errorMessage);
-            //     return;
-            // }
+        const result = await launchImageLibrary(options)
+        setFilePath(result.assets[0].uri)
+        // if (response.didCancel) {
+        //     Alert.alert('User cancelled camera picker');
+        //     return;
+        // } else if (response.errorCode == 'camera_unavailable') {
+        //     Alert.alert('Camera not available on device');
+        //     return;
+        // } else if (response.errorCode == 'permission') {
+        //     Alert.alert('Permission not satisfied');
+        //     return;
+        // } else if (response.errorCode == 'others') {
+        //     Alert.alert(response.errorMessage);
+        //     return;
+        // }
 
-            // console.log('fileName -> ', response.assets[4]);
-            // // setFilePath(response);
+        // console.log('fileName -> ', response.assets[4]);
+        // // setFilePath(response);
         // });
-
+        console.log(filePath)
     }
     return (
         <ScreenWrapper>
             <View style={{ flex: 1 }}>
                 <Header
                     name='Edit Profile'
-                    icon={true} 
-                    onPress={()=>navigation.goBack()}/>
+                    icon={true}
+                    onPress={() => navigation.goBack()} />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{ margin: width(10) }}>
-                        <View style={{ alignItems: 'center' }}>
-                            <Image
-                        
+                        <View style={{ borderRadius:width(100),alignItems: 'center',backgroundColor:'red',height:height(12),width:width(24),alignSelf:'center' }}>
+                            {filePath ?
+                                <Image
+                                style={{width:width(24),height:height(12),borderRadius:width(8)}}
+                                source={{ isStatic: true, uri: filePath }}
+                                />
+                                :
+                                <Image
+                                style={{width:width(24),height:height(12),borderRadius:width(8)}}
                                 source={require('./girl.png')}
                             />
+                            }
                             <TouchableOpacity
                                 onPress={openGallery}
-                                style={{ position: 'absolute', left: width(40), bottom: -10, backgroundColor: '#7EBC2B', width: width(8), height: height(4), borderRadius: width(8), alignItems: 'center', justifyContent: 'center' }}>
+                                style={{ position: 'absolute', left: width(15), bottom: -10, backgroundColor: '#7EBC2B', width: width(8), height: height(4), borderRadius: width(8), alignItems: 'center', justifyContent: 'center' }}>
                                 <EditSvg />
                             </TouchableOpacity>
                         </View>
